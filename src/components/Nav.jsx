@@ -1,13 +1,25 @@
 import { Navbar, Button, Dropdown, Indicator, Badge } from "react-daisyui";
 import { useRouter } from "next/navigation";
-// import { useQueryClient, useQuery } from "react-query";
 import { useState, useEffect } from "react";
-
-export default function Nav({ data }) {
+import localforage from "localforage";
+import { logout } from "@/pages/api/users";
+export default function Nav() {
+  const [auth, setAuth] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { push } = useRouter();
+  useEffect(() => {
+    const getToken = async () => {
+      const token = await localforage.getItem("token");
+      if (token) {
+        setLoading(false);
+        setAuth(token);
+      }
+    };
+    getToken();
+  }, []);
   return (
     <div className="pb-10 flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
       <Navbar>
-        {data}
         <Navbar.Start>
           <Dropdown>
             <Button color="ghost" shape="circle" tabIndex={0}>
@@ -28,18 +40,22 @@ export default function Nav({ data }) {
             </Button>
             <Dropdown.Menu tabIndex={0} className="menu-compact w-52">
               <Dropdown.Item href="/">Homepage</Dropdown.Item>
-              {/* {token ? (
-                <>
-                  <form onSubmit={logout}>
-                    <Button type="submit">Logout</Button>
-                  </form>
-                </>
-              ) : (
+              {!auth ? (
                 <>
                   <Dropdown.Item href="/login">Login</Dropdown.Item>
                   <Dropdown.Item href="/register">Register</Dropdown.Item>
                 </>
-              )} */}
+              ) : (
+                <Dropdown.Item
+                  onClick={() => {
+                    logout();
+                    setAuth(false);
+                    push("/");
+                  }}
+                >
+                  Logout
+                </Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Start>
