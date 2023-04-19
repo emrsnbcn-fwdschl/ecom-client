@@ -1,19 +1,27 @@
 import { Input, Button } from "react-daisyui";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { login } from "../api/users";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
+
   const onChangeHandler = (e) =>
     setUser({ ...user, [e.target.name]: e.target.value });
 
   const { mutate, isLoading } = useMutation(login, {
     onSuccess: (data) => {
-      console.log(data);
+      if (!localStorage.getItem("token")) {
+        localStorage.setItem("token", data);
+        queryClient.setQueryData("token", data);
+      }
+      push("/");
     },
     onError: (error) => {
       Swal.fire("Oops...", error.response.data.msg, "error");

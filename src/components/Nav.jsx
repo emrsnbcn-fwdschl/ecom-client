@@ -1,9 +1,13 @@
 import { Navbar, Button, Dropdown, Indicator, Badge } from "react-daisyui";
+import { useRouter } from "next/navigation";
+// import { useQueryClient, useQuery } from "react-query";
+import { useState, useEffect } from "react";
 
-export default function Nav() {
+export default function Nav({ data }) {
   return (
     <div className="pb-10 flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
       <Navbar>
+        {data}
         <Navbar.Start>
           <Dropdown>
             <Button color="ghost" shape="circle" tabIndex={0}>
@@ -24,8 +28,18 @@ export default function Nav() {
             </Button>
             <Dropdown.Menu tabIndex={0} className="menu-compact w-52">
               <Dropdown.Item href="/">Homepage</Dropdown.Item>
-              <Dropdown.Item href="/login">Login</Dropdown.Item>
-              <Dropdown.Item href="/register">Register</Dropdown.Item>
+              {/* {token ? (
+                <>
+                  <form onSubmit={logout}>
+                    <Button type="submit">Logout</Button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <Dropdown.Item href="/login">Login</Dropdown.Item>
+                  <Dropdown.Item href="/register">Register</Dropdown.Item>
+                </>
+              )} */}
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Start>
