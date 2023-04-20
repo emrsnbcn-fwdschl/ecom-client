@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import localforage from "localforage";
 import { logout } from "@/pages/api/users";
+import { useQuery, useQueryClient } from "react-query";
 export default function Nav() {
   const [auth, setAuth] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,21 +41,23 @@ export default function Nav() {
             </Button>
             <Dropdown.Menu tabIndex={0} className="menu-compact w-52">
               <Dropdown.Item href="/">Homepage</Dropdown.Item>
-              {!auth ? (
+              {auth ? (
+                <>
+                  <Dropdown.Item
+                    onClick={() => {
+                      logout();
+                      setAuth(false);
+                      push("/");
+                    }}
+                  >
+                    Logout
+                  </Dropdown.Item>
+                </>
+              ) : (
                 <>
                   <Dropdown.Item href="/login">Login</Dropdown.Item>
                   <Dropdown.Item href="/register">Register</Dropdown.Item>
                 </>
-              ) : (
-                <Dropdown.Item
-                  onClick={() => {
-                    logout();
-                    setAuth(false);
-                    push("/");
-                  }}
-                >
-                  Logout
-                </Dropdown.Item>
               )}
             </Dropdown.Menu>
           </Dropdown>

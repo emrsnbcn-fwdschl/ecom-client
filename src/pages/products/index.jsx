@@ -1,6 +1,7 @@
 import Product from "./[id]";
 import { getProducts } from "../api/products";
 import { useQuery } from "react-query";
+
 export default function ProductsList(props) {
   const { data } = useQuery("products", getProducts, {
     initialData: props.data,

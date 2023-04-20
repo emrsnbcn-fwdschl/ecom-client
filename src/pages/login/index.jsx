@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { login } from "../api/users";
 import { useRouter } from "next/navigation";
+import localforage from "localforage";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -16,10 +17,11 @@ export default function Login() {
     setUser({ ...user, [e.target.name]: e.target.value });
 
   const { mutate, isLoading } = useMutation(login, {
-    onSuccess: (data) => {
-      if (!localStorage.getItem("token")) {
-        localStorage.setItem("token", data);
-        queryClient.setQueryData("token", data);
+    onSuccess: async (data) => {
+      const token = await localforage.getItem("token");
+      if (!token) {
+        await localforage.setItem("token", data);
+        // queryClient.setQueryData("token", data);
       }
       push("/");
     },
