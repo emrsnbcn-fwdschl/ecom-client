@@ -13,9 +13,13 @@ export default function Cart() {
 
   const checkoutHandler = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:1111/orders", data, {
-      headers: { "x-auth-token": await localforage.getItem("token") },
-    });
+    const res = await axios.post(
+      "https://ecom-backend-service-hoaz.onrender.com/orders",
+      data,
+      {
+        headers: { "x-auth-token": await localforage.getItem("token") },
+      }
+    );
     if (res.status === 200) window.location.href = res.data;
   };
 

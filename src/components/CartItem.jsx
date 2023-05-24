@@ -7,7 +7,7 @@ export default function CartItem({ item }) {
         <Mask
           className="w-32 h-32 object-cover"
           variant="squircle"
-          src={`http://localhost:1111/${item.product.image.replace(
+          src={`https://ecom-backend-service-hoaz.onrender.com/${item.product.image.replace(
             "public",
             ""
           )}`}

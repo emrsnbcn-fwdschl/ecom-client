@@ -32,7 +32,10 @@ export default function Product({ product }) {
     <div>
       <Card>
         <Card.Image
-          src={`http://localhost:1111/${product.image.replace("public", "")}`}
+          src={`https://ecom-backend-service-hoaz.onrender.com/${product.image.replace(
+            "public",
+            ""
+          )}`}
           alt={product.name}
         />
         <Card.Body>
