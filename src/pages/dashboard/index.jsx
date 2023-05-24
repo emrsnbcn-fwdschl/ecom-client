@@ -1,6 +1,6 @@
 import { Table, Checkbox } from "react-daisyui";
 import { useQuery } from "react-query";
-import DashboardProduct from "./product";
+import DashboardProduct from "./Product";
 import { useRouter } from "next/router";
 import { getProducts } from "../api/products";
 
