@@ -5,11 +5,11 @@ import { updateProduct } from "@/pages/api/products";
 
 export default function EditProduct({ visible, setVisible, product }) {
   const [updatedProduct, setUpdatedProduct] = useState({
-    id: product._id,
-    name: product.name,
-    price: product.price,
-    description: product.description,
-    quantity: product.quantity,
+    id: product?._id,
+    name: product?.name,
+    price: product?.price,
+    description: product?.description,
+    quantity: product?.quantity,
   });
   const [image, setImage] = useState();
   const queryClient = useQueryClient();

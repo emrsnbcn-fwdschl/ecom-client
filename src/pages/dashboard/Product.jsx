@@ -46,13 +46,13 @@ export default function DashboardProduct({ product }) {
       </div>
       <div className="items-center space-x-3 truncate">
         <div>
-          <div className="font-bold">{product.name}</div>
+          <div className="font-bold">{product?.name}</div>
         </div>
       </div>
-      <div>{product.description}</div>
-      <div>{product.price}</div>
-      <div>{product.quantity}</div>
-      {!product.isActive ? (
+      <div>{product?.description}</div>
+      <div>{product?.price}</div>
+      <div>{product?.quantity}</div>
+      {!product?.isActive ? (
         <>
           <Button color="error">X</Button>
         </>

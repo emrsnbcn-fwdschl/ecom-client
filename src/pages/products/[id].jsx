@@ -32,16 +32,16 @@ export default function Product({ product }) {
     <div>
       <Card>
         <Card.Image
-          src={`https://ecom-backend-service-hoaz.onrender.com/${product.image.replace(
+          src={`https://ecom-backend-service-hoaz.onrender.com/${product?.image.replace(
             "public",
             ""
           )}`}
-          alt={product.name}
+          alt={product?.name}
         />
         <Card.Body>
-          <Card.Title tag="h2">{product.name}</Card.Title>
-          <p>{product.description}</p>
-          <small>Quantity: {product.quantity}</small>
+          <Card.Title tag="h2">{product?.name}</Card.Title>
+          <p>{product?.description}</p>
+          <small>Quantity: {product?.quantity}</small>
           <Card.Actions className="justify-end">
             <form onSubmit={onSubmitHandler}>
               <div className="form-control">
