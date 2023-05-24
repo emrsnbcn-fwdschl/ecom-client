@@ -16,7 +16,7 @@ export default function CartItem({ item }) {
           <div className="font-bold">{item.product.name}</div>
         </div>
       </div>
-      <div>Price</div>
+      <div>{item.product.price}</div>
       <div>{item.quantity}</div>
       <div>{item.subtotal}</div>
     </Table.Row>
